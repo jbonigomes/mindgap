@@ -27,12 +27,21 @@ $transparent: rgba($white, 30%);
           box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
 }
 
+@mixin border-box() {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body, section, .container { height: 100%; }
+
 body {
   margin: 0;
   color: $white;
   padding: 50px 0;
   font-size: 16px;
   background: $dark;
+  @include border-box();
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -53,6 +62,10 @@ header {
   }
 }
 
+section {
+  overflow-y: scroll;
+}
+
 h1 {
   margin: 0;
   font-size: 24px;
@@ -62,8 +75,6 @@ h1 {
 ul {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow-y: scroll;
   list-style-type: none;
 
   li {
@@ -109,7 +120,6 @@ button {
   overflow: hidden;
   max-width: 800px;
   background: $navy;
-  position: relative;
 }
 
 // Styles for the list items
@@ -130,5 +140,19 @@ button {
   i {
     color: $blue;
     font-size: 12px;
+  }
+}
+
+// The empty note
+.note {
+  top: 50%;
+  font-size: 22px;
+  text-align: center;
+  position: relative;
+  transform: translateY(-50%);
+
+  i {
+    font-size: 60px;
+    padding-top: 60px;
   }
 }

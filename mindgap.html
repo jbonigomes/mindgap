@@ -11,24 +11,38 @@
       <span><i class="fa fa-chevron-left"></i> Back</span>
       <h1>Mind'Gap</h1>
     </header>
- 
-    <ul>
-      {{#each items}}
-        <li class="green">
-          <div class="time">
-            <i class="fa fa-clock-o"></i>
-            {{time}}
-          </div>
-          <div class="title">
-            {{title}}
-          </div>
-          <div class="reocurrence">
-            <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
-          </div>
-        </li>
-      {{/each}}
-    </ul>
 
-    <button>NEW</button>
+    <section>
+      {{#if items.count}}
+        <ul>
+          {{#each items}}
+            <li class="green">
+              <div class="time">
+                <i class="fa fa-clock-o"></i>
+                {{time}}
+              </div>
+              <div class="title">
+                {{title}}
+              </div>
+              <div class="reocurrence">
+                <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <div class="note">
+          You do not have any<br>
+          items yet<br><br>
+          Click 'NEW' below<br>
+          to get started<br>
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      {{/if}}
+    </section>
+
+    <footer>
+      <button>NEW</button>
+    </footer>
   </div>
 </body>
