@@ -1,1 +1,133 @@
-@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/ionicons';
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+
+// Gradient
+$grey:  #BDC3C7;
+$white: #ECF0F1;
+$black: #000000;
+
+// Core colours
+$navy:   #34495E;
+$dark:   #2C3E50;
+$blue:   #2980B9;
+$orange: #D35400;
+
+// Status colours
+$red:    #C0392B;
+$green:  #27AE60;
+$yellow: #F39C12;
+
+// Transparencies
+$shadow:      rgba($black, 50%);
+$transparent: rgba($white, 30%);
+
+@mixin shadow($colour) {
+  -webkit-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
+     -moz-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
+          box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
+}
+
+body {
+  margin: 0;
+  color: $white;
+  padding: 50px 0;
+  font-size: 16px;
+  background: $dark;
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  position: fixed;
+  background: $dark;
+  text-align: center;
+
+  span {
+    top: 14px;
+    left: 10px;
+    text-align: left;
+    position: absolute;
+  }
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  font-family: 'Lobster', cursive;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: scroll;
+  list-style-type: none;
+
+  li {
+    padding: 10px 10px 20px 20px;
+
+    div {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  li.green {
+    @include shadow($green);
+  }
+
+  li.red {
+    @include shadow($red);
+  }
+
+  li.yellow {
+    @include shadow($yellow);
+  }
+}
+
+button {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  color: $white;
+  outline: none;
+  font-size: 18px;
+  position: fixed;
+  text-align: center;
+  background: $orange;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 800px;
+  background: $navy;
+}
+
+// Styles for the list items
+.time {
+  color: $grey;
+  font-size: 12px;
+  text-align: right;
+}
+
+.title {
+  margin-top: -5px;
+}
+
+.reocurrence {
+  color: $grey;
+  font-size: 14px;
+
+  i {
+    color: $blue;
+    font-size: 12px;
+  }
+}
