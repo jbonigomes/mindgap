@@ -1,9 +1,15 @@
-# Mind'Gap, the app that allows you to track re-occuring tasks
+# Mind'Gap
+## The app that allows you to track re-occuring tasks
 
-## Ensure you have Meteor installed:
+### Ensure you have Meteor installed:
 
     $ curl https://install.meteor.com/ | sh   
 
-## Run the following to start the server:
+### Run the following to start the server:
 
     $ meteor
+
+### Providing you have XCode and/or the Android SDK's configured correctly:
+
+    $ meteor run ios
+    $ meteor run android
