@@ -1,14 +1,23 @@
 <head>
-  <title>mindgap</title>
+  <title>Mind'Gap</title>
 </head>
-
+ 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <div class="container">
+    <header>
+      <h1>Mind'Gap</h1>
+    </header>
+ 
+    <ul>
+      {{#each items}}
+        {{> item}}
+      {{/each}}
+    </ul>
+  </div>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+ 
+<template name="item">
+  <li>
+    {{text}}
+  </li>
 </template>
