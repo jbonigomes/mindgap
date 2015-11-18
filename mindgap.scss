@@ -77,10 +77,6 @@ header {
   }
 }
 
-section {
-  overflow-y: scroll;
-}
-
 h1 {
   margin: 0;
   font-size: 24px;
@@ -154,6 +150,7 @@ input[type="text"] {
   overflow: hidden;
   max-width: 800px;
   background: $navy;
+  position: relative;
 }
 
 .form-control {
@@ -212,6 +209,51 @@ input[type="text"] {
 
   i.active {
     background: $transparent;
+  }
+}
+
+// Deal with our fake router
+section {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $navy;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+section.home {
+  z-index: 1;
+}
+
+section.form {
+  z-index: 0;
+}
+
+button.new-button {
+  z-index: 1;
+}
+
+button.save-button {
+  z-index: 0;
+}
+
+.editing {
+  section.home {
+    z-index: 0;
+  }
+
+  section.form {
+    z-index: 1;
+  }
+
+  button.new-button {
+    z-index: 0;
+  }
+
+  button.save-button {
+    z-index: 1;
   }
 }
 

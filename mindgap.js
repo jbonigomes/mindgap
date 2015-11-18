@@ -1,21 +1,49 @@
 if(Meteor.isClient) {
 
-  var items = new Meteor.Collection(null);
+  var items = new Ground.Collection(null);
 
   Template.body.helpers({
     items: function () {
-      return Ground.Collection(items, 'items');
+      return items.find({});
     }
-    // items: [
-    //   { title: 'Change bed sheets', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Take medication', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Change tooth brush', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Change bed sheets', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Take medication', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Change tooth brush', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Change bed sheets', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Take medication', recurring: 'week', number: 2, time: 555 },
-    //   { title: 'Change tooth brush', recurring: 'week', number: 2, time: 555 }
-    // ]
+  });
+
+  Template.body.events({
+    'click .save-button': function(e) {
+      e.preventDefault();
+
+      // Get value from form element
+      var text   = $('input[type="text"]').val();
+      var number = $('input[type="range"]').val();
+      var reocur = $('.icons .active').data('value');
+
+      // Clear the elements
+      $('input[type="text"]').val('');
+      $('input[type="range"]').val('');
+      $('.icons i').each(function(i) {
+        if(i === 0) {
+          $(this).addClass('active');
+        }
+        else {
+          $(this).removeClass('active');
+        }
+      });
+
+      // Insert on DB
+      items.insert({
+        title: text,
+        number: +number,
+        recurring: reocur,
+        time: new Date().getTime()
+      });
+
+      // Hide the form
+      $('body').removeClass('editing');
+    },
+    'click .new-button': function(e) {
+      e.preventDefault();
+
+      $('body').addClass('editing');
+    }
   });
 }
