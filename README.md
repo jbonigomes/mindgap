@@ -13,3 +13,7 @@
 
     $ meteor run ios
     $ meteor run android
+
+### This project uses git-flow
+
+http://nvie.com/posts/a-successful-git-branching-model/
