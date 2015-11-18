@@ -1,9 +1,10 @@
-Items = new Mongo.Collection('items');
-
 if(Meteor.isClient) {
+
+  var items = new Meteor.Collection(null);
+
   Template.body.helpers({
     items: function () {
-      return Items.find({});
+      return Ground.Collection(items, 'items');
     }
     // items: [
     //   { title: 'Change bed sheets', recurring: 'week', number: 2, time: 555 },

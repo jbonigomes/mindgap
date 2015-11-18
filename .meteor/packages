@@ -20,7 +20,10 @@ autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 fourseven:scss
 fortawesome:fontawesome
+
 sanjo:jasmine
 velocity:html-reporter
 xolvio:cucumber
 velocity:console-reporter
+
+ground:db
