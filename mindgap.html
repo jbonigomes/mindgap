@@ -13,22 +13,24 @@
 
     <section class="home">
       {{#if items.count}}
-        <ul>
-          {{#each items}}
-            <li class="green">
-              <div class="time">
-                <i class="fa fa-clock-o"></i>
-                {{time}}
-              </div>
-              <div class="title">
-                {{title}}
-              </div>
-              <div class="reocurrence">
-                <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
-              </div>
-            </li>
-          {{/each}}
-        </ul>
+        {{#HammerTouchArea initOptions=hammerInitOptions gestureMap=gests}}
+          <ul>
+            {{#each items}}
+              <li class="green">
+                <div class="time">
+                  <i class="fa fa-clock-o"></i>
+                  {{time}}
+                </div>
+                <div class="title">
+                  {{title}}
+                </div>
+                <div class="reocurrence">
+                  <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        {{/HammerTouchArea}}
       {{else}}
         <div class="note">
           You do not have any<br>

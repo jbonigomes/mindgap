@@ -8,8 +8,22 @@ if(Meteor.isClient) {
   Template.body.helpers({
     items: function () {
       return items.find({});
+    },
+    hammerInitOptions: {
+      drag_min_distance: 1,
+      swipe_velocity: 2.1,
+      prevent_default: true
+    },
+    gests: {
+      'swipeleft ul li': function (event, templateInstance) {
+        console.log(event.deltaX);
+      }
     }
   });
+
+
+
+
 
   Template.body.events({
     'click .save-button': function(e) {
