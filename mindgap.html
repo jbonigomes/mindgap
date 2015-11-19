@@ -5,15 +5,17 @@
 </head>
  
 <body>
-  <div class="container">
+  <div class="container {{#if isEditing}}editing{{/if}}">
     <header>
-      <span><i class="fa fa-chevron-left"></i> Back</span>
-      <h1>Mind'Gap</h1>
+      {{#if isEditing}}
+        <span class="back"><i class="fa fa-chevron-left"></i> Back</span>
+      {{/if}}
+      <h1>Mind'Gap {{editing}}</h1>
     </header>
 
     <section class="home">
       {{#if items.count}}
-        {{#HammerTouchArea initOptions=hammerInitOptions gestureMap=gests}}
+        {{#HammerTouchArea initOptions=hammerInit gestureMap=hammerGestures}}
           <ul>
             {{#each items}}
               <li class="green">
@@ -44,20 +46,28 @@
 
     <section class="form">
       <div class="form-control">
-        <input type="text" placeholder="Enter item name">
+        <input type="text" placeholder="Enter item name" value="{{formItem}}">
       </div>
-
-      <h2>Every 3 hours</h2>
 
       <div class="form-control">
-        <input type="range" min="1" max="12" step="1">
+        <h2>Every {{period}}</h2>
       </div>
 
-      <div class="icons">
-        <i class="fa fa-hourglass-half active" data-value="hour"></i>
-        <i class="fa fa-sun-o" data-value="day"></i>
-        <i class="fa fa-pie-chart" data-value="week"></i>
-        <i class="fa fa-calendar-o" data-value="month"></i>
+      <div class="form-control">
+        <input type="range" min="1" max="12" step="1" value="{{formNumber}}">
+      </div>
+
+      <div class="form-control">
+        <div class="icons">
+          <i class="fa fa-hourglass-half {{#if isHour}}active{{/if}}"
+             data-value="hour"></i>
+          <i class="fa fa-sun-o {{#if isDay}}active{{/if}}"
+             data-value="day"></i>
+          <i class="fa fa-pie-chart {{#if isWeek}}active{{/if}}"
+             data-value="week"></i>
+          <i class="fa fa-calendar-o {{#if isMonth}}active{{/if}}"
+             data-value="month"></i>
+        </div>
       </div>
     </section>
 

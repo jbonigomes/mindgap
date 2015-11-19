@@ -1,79 +1,115 @@
 if(Meteor.isClient) {
 
-  var animationEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
-    'oanimationend animationend';
-
   var items = new Ground.Collection(null);
+
+  resetSession(false);
 
   Template.body.helpers({
     items: function () {
       return items.find({});
     },
-    hammerInitOptions: {
+    formItem: function() {
+      return Session.get('formItem');
+    },
+    formNumber: function() {
+      return Session.get('formNumber');
+    },
+    formReocur: function() {
+      return Session.get('formReocur');
+    },
+    isHour: function() {
+      return Session.get('formReocur') === 'hour';
+    },
+    isDay: function() {
+      return Session.get('formReocur') === 'day';
+    },
+    isWeek: function() {
+      return Session.get('formReocur') === 'week';
+    },
+    isMonth: function() {
+      return Session.get('formReocur') === 'month';
+    },
+    isEditing: function() {
+      return Session.get('formEditing');
+    },
+    period: function() {
+      if(Session.get('formNumber') > 1) {
+        return Session.get('formNumber') + ' ' + Session.get('formReocur') + 's';
+      }
+      return Session.get('formReocur');
+    },
+    hammerInit: {
       drag_min_distance: 1,
       swipe_velocity: 2.1,
       prevent_default: true
     },
-    gests: {
-      'swipeleft ul li': function (event, templateInstance) {
-        console.log(event.deltaX);
+    hammerGestures: {
+      'swipeleft ul li': function(e, templateInstance) {
+        console.log(e.deltaX);
       }
     }
   });
 
-
-
-
-
   Template.body.events({
-    'click .save-button': function(e) {
+    'click .icons i': function(e) {
       e.preventDefault();
-
-      // Get value from form element
-      var text   = $('input[type="text"]').val();
-      var number = $('input[type="range"]').val();
-      var reocur = $('.icons .active').data('value');
-
-      if(text.length > 1) {
-        // Clear the elements
-        $('input[type="text"]').val('');
-        $('input[type="range"]').val('');
-        $('.icons i').each(function(i) {
-          if(i === 0) {
-            $(this).addClass('active');
-          }
-          else {
-            $(this).removeClass('active');
-          }
-        });
-
-        // Insert on DB
-        items.insert({
-          title: text,
-          number: +number,
-          recurring: reocur,
-          time: new Date().getTime()
-        });
-
-        // Hide the form
-        $('body').removeClass('editing');
-      }
-      else {
-        $('.save-button').addClass('shake animated');
-        $('.save-button').on(animationEvent, function() {
-          $('.save-button').removeClass('shake animated');
-        });
-
-        $('input[type="text"]').addClass('shake animated');
-        $('input[type="text"]').on(animationEvent, function() {
-          $('input[type="text"]').removeClass('shake animated');
-        });
-      }
+      Session.set('formReocur', $(e.target).data('value'));
+    },
+    'click .back': function(e) {
+      e.preventDefault();
+      resetSession(false);
     },
     'click .new-button': function(e) {
       e.preventDefault();
+      resetSession(true);
+    },
+    'click .save-button': function(e) {
+      e.preventDefault();
 
-      $('body').addClass('editing');
+      // There is a bug with Meteor's reactivity regarding input elements
+      // For now, we have to hack...
+      // https://github.com/meteor/meteor/issues/1965
+      Session.set('formItem', $('input[type="text"]').val());
+
+      if(Session.get('formItem').length > 1) {
+        items.insert({
+          title: Session.get('formItem'),
+          number: +Session.get('formNumber'),
+          recurring: Session.get('formReocur'),
+          time: new Date().getTime()
+        });
+
+        resetSession(false);
+
+        // ...with a cherry on top :D
+        $('input[type="text"]').val('');
+      }
+      else {
+        shakeForm();
+      }
     }
   });
+
+  function resetSession(isEdit) {
+    Session.set('formId', -1);
+    Session.set('formItem', '');
+    Session.set('formNumber', 1);
+    Session.set('formReocur', 'hour');
+    Session.set('formEditing', isEdit);
+  }
+
+  function shakeForm() {
+    var animationEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
+      'oanimationend animationend';
+
+    $('.save-button').addClass('shake animated');
+    $('.save-button').on(animationEvent, function() {
+      $('.save-button').removeClass('shake animated');
+    });
+
+    $('input[type="text"]').addClass('shake animated');
+    $('input[type="text"]').on(animationEvent, function() {
+      $('input[type="text"]').removeClass('shake animated');
+    });
+  }
 }
