@@ -2,11 +2,9 @@ if(Meteor.isClient) {
 
   var items = new Ground.Collection(null);
 
-  resetSession(false);
-
   Template.body.helpers({
     items: function () {
-      return items.find({});
+      return items.find({}, {sort: {time: 1}});
     },
     formItem: function() {
       return Session.get('formItem');
@@ -33,10 +31,13 @@ if(Meteor.isClient) {
       return Session.get('formEditing');
     },
     period: function() {
-      if(Session.get('formNumber') > 1) {
-        return Session.get('formNumber') + ' ' + Session.get('formReocur') + 's';
-      }
-      return Session.get('formReocur');
+      return makePeriod();
+    },
+    fromNow: function() {
+      return this.time.relative();
+    },
+    status: function() {
+      return makeStatus(this.time);
     },
     hammerInit: {
       drag_min_distance: 1,
@@ -65,30 +66,37 @@ if(Meteor.isClient) {
     },
     'click .save-button': function(e) {
       e.preventDefault();
-
-      // There is a bug with Meteor's reactivity regarding input elements
-      // For now, we have to hack...
-      // https://github.com/meteor/meteor/issues/1965
-      Session.set('formItem', $('input[type="text"]').val());
-
-      if(Session.get('formItem').length > 1) {
-        items.insert({
-          title: Session.get('formItem'),
-          number: +Session.get('formNumber'),
-          recurring: Session.get('formReocur'),
-          time: new Date().getTime()
-        });
-
-        resetSession(false);
-
-        // ...with a cherry on top :D
-        $('input[type="text"]').val('');
-      }
-      else {
-        shakeForm();
-      }
+      saveForm();
     }
   });
+
+  function makeDueDate(number, reocur) {
+    var config = {};
+    config[reocur] = number;
+    return Date.create().advance(config);
+  }
+
+  function makeStatus(time) {
+    if(Date.create(time).rewind({hour: 24}).isFuture()) {
+      return 'green';
+    }
+    else if(time.isFuture()) {
+      return 'yellow';
+    }
+
+    return 'red';
+  }
+
+  function makePeriod() {
+    var number = Session.get('formNumber');
+    var reocur = Session.get('formReocur');
+
+    if(number > 1) {
+      return number + ' ' + reocur + 's';
+    }
+
+    return reocur;
+  }
 
   function resetSession(isEdit) {
     Session.set('formId', -1);
@@ -98,18 +106,50 @@ if(Meteor.isClient) {
     Session.set('formEditing', isEdit);
   }
 
+  function saveForm() {
+    // There is a bug with Meteor's reactivity regarding input elements
+    // For now, we have to hack...
+    // https://github.com/meteor/meteor/issues/1965
+    Session.set('formItem', $('input[type="text"]').val());
+
+    var item   = Session.get('formItem');
+    var reocur = Session.get('formReocur');
+    var number = +Session.get('formNumber');
+
+    if(item.length > 1) {
+      items.insert({
+        title: item,
+        number: number,
+        recurring: reocur,
+        time: makeDueDate(number, reocur)
+      });
+
+      resetSession(false);
+
+      // ...with a cherry on top :D
+      $('input[type="text"]').val('');
+    }
+    else {
+      shakeForm();
+    }
+  }
+
   function shakeForm() {
-    var animationEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
-      'oanimationend animationend';
+    var animationEvent = [
+      'webkitAnimationEnd',
+      'mozAnimationEnd',
+      'MSAnimationEnd',
+      'oanimationend',
+      'animationend'
+    ].toString().replace(',', ' ');
+ 
+    $('input[type="text"], .save-button').addClass('shake animated');
 
-    $('.save-button').addClass('shake animated');
-    $('.save-button').on(animationEvent, function() {
-      $('.save-button').removeClass('shake animated');
-    });
+    $('.save-button').on(animationEvent, removeShake);
+    $('input[type="text"]').on(animationEvent, removeShake);
+  }
 
-    $('input[type="text"]').addClass('shake animated');
-    $('input[type="text"]').on(animationEvent, function() {
-      $('input[type="text"]').removeClass('shake animated');
-    });
+  function removeShake(el) {
+    $(el.target).removeClass('shake animated');
   }
 }

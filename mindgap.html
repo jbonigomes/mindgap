@@ -18,14 +18,12 @@
         {{#HammerTouchArea initOptions=hammerInit gestureMap=hammerGestures}}
           <ul>
             {{#each items}}
-              <li class="green">
+              <li class="{{status}}">
                 <div class="time">
                   <i class="fa fa-clock-o"></i>
-                  {{time}}
+                  {{fromNow}}
                 </div>
-                <div class="title">
-                  {{title}}
-                </div>
+                <div class="title">{{title}}</div>
                 <div class="reocurrence">
                   <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
                 </div>
@@ -51,6 +49,11 @@
 
       <div class="form-control">
         <h2>Every {{period}}</h2>
+      </div>
+
+      <div class="form-control">
+        <div id="slider"></div>
+        <p>Left value: {{slider.[0]}}, right value: {{slider.[1]}}</p>
       </div>
 
       <div class="form-control">

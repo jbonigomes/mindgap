@@ -23,10 +23,20 @@ http://nvie.com/posts/a-successful-git-branching-model/
 - Gestures for sliding list items to the left and right
   - Sliding to the right should mark the item as done
   - Sliding to the left should delete the item
-- Add a from now function for the dates
-- Add the right classes for the items (green, yellow and red)
-- Order the list appropriately
-- See what happens with the bug about reactivity, could save two lines of code :D
-- Integrate the slider
+- Integrate (and style) the slider
+  - https://github.com/rcy/meteor-nouislider/blob/master/example/example.js
+- Push notifications
+  - http://stackoverflow.com/questions/33557343/local-notifications-for-meteor-cordova
+  - https://github.com/katzer/cordova-plugin-local-notifications
+- Publish (Android and iOS)
+- Remove autopublish and insecure packages
+- Tests
+
+### Version 2
+
 - Animations, animations, animations
-- Push notifications?
+- See what happens with the bug about reactivity, could save two lines of code :D
+- Templates and proper routing?
+- Do a login system and persist data on the web?
+- More tests
+
