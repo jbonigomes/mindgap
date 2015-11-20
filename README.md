@@ -25,8 +25,8 @@ http://nvie.com/posts/a-successful-git-branching-model/
   - Sliding to the left should delete the item
 - Publish (Android and iOS)
 - Remove autopublish and insecure packages
-- Does using Session.setDefault solves the two way data bind problem?
 - Tests
+- add legends to icons (day, hour, month and week)
 
 ### Version 2
 
