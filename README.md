@@ -23,8 +23,6 @@ http://nvie.com/posts/a-successful-git-branching-model/
 - Gestures for sliding list items to the left and right
   - Sliding to the right should mark the item as done
   - Sliding to the left should delete the item
-- Integrate (and style) the slider
-  - https://github.com/rcy/meteor-nouislider/blob/master/example/example.js
 - Publish (Android and iOS)
 - Remove autopublish and insecure packages
 - Does using Session.setDefault solves the two way data bind problem?
@@ -32,6 +30,7 @@ http://nvie.com/posts/a-successful-git-branching-model/
 
 ### Version 2
 
+- Tooltips for the slider
 - Push notifications
   - http://stackoverflow.com/questions/33557343/local-notifications-for-meteor-cordova
   - https://github.com/katzer/cordova-plugin-local-notifications

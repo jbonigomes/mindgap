@@ -44,8 +44,8 @@ if(Meteor.isClient) {
       return makeStatus(this.time);
     },
     hammerInit: {
-      drag_min_distance: 1,
       swipe_velocity: 2.1,
+      drag_min_distance: 1,
       prevent_default: true
     },
     hammerGestures: {
