@@ -27,6 +27,7 @@ http://nvie.com/posts/a-successful-git-branching-model/
   - https://github.com/rcy/meteor-nouislider/blob/master/example/example.js
 - Publish (Android and iOS)
 - Remove autopublish and insecure packages
+- Does using Session.setDefault solves the two way data bind problem?
 - Tests
 
 ### Version 2
