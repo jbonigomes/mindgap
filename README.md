@@ -25,15 +25,17 @@ http://nvie.com/posts/a-successful-git-branching-model/
   - Sliding to the left should delete the item
 - Integrate (and style) the slider
   - https://github.com/rcy/meteor-nouislider/blob/master/example/example.js
-- Push notifications
-  - http://stackoverflow.com/questions/33557343/local-notifications-for-meteor-cordova
-  - https://github.com/katzer/cordova-plugin-local-notifications
 - Publish (Android and iOS)
 - Remove autopublish and insecure packages
 - Tests
 
 ### Version 2
 
+- Push notifications
+  - http://stackoverflow.com/questions/33557343/local-notifications-for-meteor-cordova
+  - https://github.com/katzer/cordova-plugin-local-notifications
+- Pull to refresh or refresh the data every minute
+  - https://atmospherejs.com/yangyi/iscrolljs-refresh
 - Animations, animations, animations
 - See what happens with the bug about reactivity, could save two lines of code :D
 - Templates and proper routing?
