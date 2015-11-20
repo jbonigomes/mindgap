@@ -21,9 +21,7 @@ fourseven:scss
 fortawesome:fontawesome
 
 sanjo:jasmine
-velocity:html-reporter
 xolvio:cucumber
-velocity:console-reporter
 
 ground:db
 autopublish
