@@ -2,6 +2,10 @@ if(Meteor.isClient) {
 
   var items = new Ground.Collection(null);
 
+  Template.body.rendered = function() {
+    resetSession();
+  };
+
   Template.body.helpers({
     items: function () {
       return items.find({}, {sort: {time: 1}});
@@ -99,6 +103,8 @@ if(Meteor.isClient) {
   }
 
   function resetSession(isEdit) {
+    setUpSlider();
+
     Session.set('formId', -1);
     Session.set('formItem', '');
     Session.set('formNumber', 1);
@@ -114,7 +120,7 @@ if(Meteor.isClient) {
 
     var item   = Session.get('formItem');
     var reocur = Session.get('formReocur');
-    var number = +Session.get('formNumber');
+    var number = parseInt(Session.get('formNumber'));
 
     if(item.length > 1) {
       items.insert({
@@ -132,6 +138,32 @@ if(Meteor.isClient) {
     else {
       shakeForm();
     }
+  }
+
+  function setUpSlider() {
+    // There is a bug with the destroy method for noUiSlider
+    // Once again, we have to hack
+    $('#slider').html('<div></div>').children().first().noUiSlider({
+      step: 1,
+      start: 1,
+      tooltips: true,
+      connect: 'lower',
+      range: {
+        'min': 1,
+        'max': 12
+      },
+      format: {
+        to: function(value) {
+          return parseInt(value);
+        },
+        from: function(value) {
+          return parseInt(value);
+        }
+      }
+    }).on('slide', function(e, val) {
+      e.preventDefault();
+      Session.set('formNumber', parseInt(val));
+    });
   }
 
   function shakeForm() {

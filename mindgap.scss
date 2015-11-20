@@ -20,6 +20,9 @@ $yellow: #F39C12;
 $shadow:      rgba(0, 0, 0, .5);
 $transparent: rgba(236, 240, 241, .3);
 
+$fakeTransparent: #758695;
+
+// Mixins
 @mixin shadow($colour) {
   -webkit-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
      -moz-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
@@ -46,6 +49,55 @@ $transparent: rgba(236, 240, 241, .3);
           box-sizing: border-box;
 }
 
+// Animations
+.animated {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+@-webkit-keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+            transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+            transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+          animation-name: shake;
+}
+
+// Global styles
 html, body, section, .container { height: 100%; }
 
 body {
@@ -144,6 +196,7 @@ input[type="text"] {
   @include border-radius(10px);
 }
 
+// Global classes
 .container {
   width: 100%;
   margin: 0 auto;
@@ -155,6 +208,10 @@ input[type="text"] {
 
 .form-control {
   padding: 30px 10px;
+}
+
+.form-control#slider {
+  padding: 30px 40px;
 }
 
 // Styles for the list items
@@ -194,6 +251,7 @@ input[type="text"] {
 
 // The icons checkboxes
 .icons {
+  overflow: hidden;
   padding: 30px 10px;
 
   i {
@@ -257,89 +315,39 @@ button.save-button {
   }
 }
 
-// The range slider (temporary)
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  margin: 12.5px 0;
+// The range slider
+.noUi-target.noUi-connect {
+  border: none;
+  box-shadow: none;
+  background: $blue;
 }
-input[type=range]:focus {
-  outline: none;
+
+.noUi-target,
+.noUi-origin {
+  @include border-radius(10px);
 }
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-  background: #2980b9;
-  border-radius: 0px;
-  border: 0px solid rgba(0, 0, 0, 0);
+
+.noUi-origin {
+  box-shadow: none;
+  background: $fakeTransparent;
 }
-input[type=range]::-webkit-slider-thumb {
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-  border: px solid #ecf0f1;
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  background: #2980b9;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -12.5px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #2980b9;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-  background: #2980b9;
-  border-radius: 0px;
-  border: 0px solid rgba(0, 0, 0, 0);
-}
-input[type=range]::-moz-range-thumb {
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-  border: px solid #ecf0f1;
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  background: #2980b9;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #2980b9;
-  border: 0px solid rgba(0, 0, 0, 0);
-  border-radius: 0px;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-}
-input[type=range]::-ms-fill-upper {
-  background: #2980b9;
-  border: 0px solid rgba(0, 0, 0, 0);
-  border-radius: 0px;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-}
-input[type=range]::-ms-thumb {
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
-  border: px solid #ecf0f1;
-  height: 30px;
-  width: 30px;
-  border-radius: 15px;
-  background: #2980b9;
-  cursor: pointer;
-  height: 5px;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #2980b9;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #2980b9;
+
+.noUi-horizontal {
+  height: 10px;
+
+  .noUi-handle {
+    top: -20px;
+    width: 50px;
+    height: 50px;
+    box-shadow: none;
+    margin-left: -8px;
+    background: $blue;
+    border: 5px solid $white;
+    @include border-radius(30px);
+  }
+
+  .noUi-handle:after,
+  .noUi-handle:before {
+    display: none;
+  }
 }
