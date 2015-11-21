@@ -12,7 +12,7 @@ if(Meteor.isClient) {
     },
     formItem: function() {
       return Session.get('formItem');
-    },   
+    },
     formNumber: function() {
       return Session.get('formNumber');
     },
@@ -42,11 +42,34 @@ if(Meteor.isClient) {
     },
     status: function() {
       return makeStatus(this.time);
+    },
+    // hammerConfig: function () {
+    //   return function (hammer, templateInstance) {
+    //     hammer.get('swipe').set({
+    //       velocity: 0.000000001
+    //     });
+    //     return hammer;
+    //   }
+    // },
+    hammerGests: {
+      'dragleft ul li': function (e, template) {
+        console.log('hi');
+        // var element = $(e.target);
+
+        // if($(e.target).context.nodeName !== 'LI') {
+        //   element = $(e.target).closest('li');
+        // }
+
+        // element.css({marginLeft: e.deltaX});
+      },
+      'dragright ul li': function (e, template) {
+        // todo
+      }
     }
   });
 
   Template.body.events({
-    'click .icons i': function(e) {
+    'click .icons a': function(e) {
       e.preventDefault();
       Session.set('formReocur', $(e.target).data('value'));
     },
