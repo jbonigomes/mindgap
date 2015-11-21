@@ -44,7 +44,10 @@
 
     <section class="form">
       <div class="form-control">
-        <input type="text" class="input-item" placeholder="Enter item name" value="{{formItem}}">
+        <input type="text"
+               class="form-item"
+               value="{{formItem}}"
+               placeholder="Enter name">
       </div>
 
       <div class="form-control">
@@ -55,16 +58,16 @@
 
       <div class="form-control">
         <div class="icons">
-          <a href="#" class="hour fa {{#if isHour}}on{{/if}}" data-value="hour">
+          <a href class="hour fa {{#if isHour}}on{{/if}}" data-value="hour">
             Hours
           </a>
-          <a href="#" class="day fa {{#if isDay}}on{{/if}}" data-value="day">
+          <a href class="day fa {{#if isDay}}on{{/if}}" data-value="day">
             Days
           </a>
-          <a href="#" class="week fa {{#if isWeek}}on{{/if}}" data-value="week">
+          <a href class="week fa {{#if isWeek}}on{{/if}}" data-value="week">
             Weeks
           </a>
-          <a href="#" class="month fa {{#if isMonth}}on{{/if}}" data-value="month">
+          <a href class="month fa {{#if isMonth}}on{{/if}}" data-value="month">
             Months
           </a>
         </div>
