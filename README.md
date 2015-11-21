@@ -21,6 +21,7 @@ http://nvie.com/posts/a-successful-git-branching-model/
 ### Todo
 
 - Gestures for sliding list items to the left and right
+  - https://github.com/chriswessels/meteor-hammer/issues/23
   - Sliding to the right should mark the item as done
   - Sliding to the left should delete the item
 - Publish (Android and iOS)

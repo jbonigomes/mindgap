@@ -42,6 +42,17 @@ if(Meteor.isClient) {
     },
     status: function() {
       return makeStatus(this.time);
+    },
+    hammerOptions: {
+      velocity: 0.1
+    },
+    hammerGests: {
+      'swipeleft ul li': function (e, template) {
+        alert('hammer time');
+      },
+      'swiperight ul li': function (e, template) {
+        alert('hammer time');
+      }
     }
   });
 
