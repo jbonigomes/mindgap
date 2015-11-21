@@ -15,7 +15,7 @@
 
     <section class="home">
       {{#if items.count}}
-        {{#HammerTouchArea gestureMap=hammerGests initOptions=hammerOptions}}
+        {{#HammerTouchArea gestureMap=hammerGests configureCallback=hammerConfig}}
           <ul>
             {{#each items}}
               <li class="{{status}}">
@@ -55,14 +55,18 @@
 
       <div class="form-control">
         <div class="icons">
-          <i class="fa fa-hourglass-half {{#if isHour}}active{{/if}}"
-             data-value="hour"></i>
-          <i class="fa fa-sun-o {{#if isDay}}active{{/if}}"
-             data-value="day"></i>
-          <i class="fa fa-pie-chart {{#if isWeek}}active{{/if}}"
-             data-value="week"></i>
-          <i class="fa fa-calendar-o {{#if isMonth}}active{{/if}}"
-             data-value="month"></i>
+          <a href="#" class="hour fa {{#if isHour}}on{{/if}}" data-value="hour">
+            Hours
+          </a>
+          <a href="#" class="day fa {{#if isDay}}on{{/if}}" data-value="day">
+            Days
+          </a>
+          <a href="#" class="week fa {{#if isWeek}}on{{/if}}" data-value="week">
+            Weeks
+          </a>
+          <a href="#" class="month fa {{#if isMonth}}on{{/if}}" data-value="month">
+            Months
+          </a>
         </div>
       </div>
     </section>
