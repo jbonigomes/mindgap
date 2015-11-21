@@ -4,12 +4,6 @@ if(Meteor.isClient) {
 
   Template.body.rendered = function() {
     resetSession();
-
-    // Hammer events
-    // var hammertime = new Hammer();
-    // hammertime.on('swipe', function(e) {
-    //   console.log(e);
-    // });
   };
 
   Template.body.helpers({
