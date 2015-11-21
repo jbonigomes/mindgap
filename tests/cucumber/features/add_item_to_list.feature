@@ -1,18 +1,15 @@
 Feature: Add new item to the list
 
-As a user I click the button "new-button"
+As a user I click the button "New"
 and I expect to be redirected to the config
 page.
 
-
-# This scenario will run as part of the Meteor dev cycle because it has the @dev tag
 @focus
   Scenario: I am a new user
   When I navigate to "/"
   Then I should see the title "Mind'Gap"
   Then I click the button "new-button"
   And I should see a new section with the title "Mind'Gap"
-
 
 @focus
   Scenario: I am attempting to add item to the list
