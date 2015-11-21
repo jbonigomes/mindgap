@@ -12,7 +12,7 @@ if(Meteor.isClient) {
     },
     formItem: function() {
       return Session.get('formItem');
-    },
+    },   
     formNumber: function() {
       return Session.get('formNumber');
     },

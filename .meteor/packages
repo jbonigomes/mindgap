@@ -20,10 +20,13 @@ fourseven:scss
 fortawesome:fontawesome
 
 sanjo:jasmine
-xolvio:cucumber
 
 ground:db
 rcy:nouislider
 digilord:sugarjs
 chriswessels:hammer
 autopublish
+xolvio:cucumber
+velocity:console-reporter
+accounts-ui
+accounts-password
