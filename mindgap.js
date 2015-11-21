@@ -42,16 +42,6 @@ if(Meteor.isClient) {
     },
     status: function() {
       return makeStatus(this.time);
-    },
-    hammerInit: {
-      swipe_velocity: 1,
-      drag_min_distance: 1,
-      prevent_default: true
-    },
-    hammerGestures: {
-      'swipeleft ul li': function(e, templateInstance) {
-        console.log(e.deltaX);
-      }
     }
   });
 
@@ -71,6 +61,10 @@ if(Meteor.isClient) {
     'click .save-button': function(e) {
       e.preventDefault();
       saveForm();
+    },
+    'swipe ul li': function(e) {
+      e.preventDefault();
+      console.log('hi');
     }
   });
 
