@@ -1,6 +1,5 @@
 if(Meteor.isClient) {
 
-  var slidingId = 'Unknown';
   var items = new Ground.Collection(null);
 
   Template.body.rendered = function() {
@@ -49,16 +48,6 @@ if(Meteor.isClient) {
     },
     hammerGestures: {
       'pan .slider': function (e) {
-        var item = this;
-        if(item._id !== slidingId) {
-          $('.slider').each(function() {
-            $(this).css({transform: 'none'});
-            $(this).closest('li').removeClass();
-          });
-
-          slidingId = item._id;
-        }
-
         var element = $(e.target);
 
         if(!$(e.target).hasClass('slider')) {
