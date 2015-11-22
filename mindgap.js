@@ -38,6 +38,9 @@ if(Meteor.isClient) {
     period: function() {
       return makePeriod();
     },
+    listPeriod: function() {
+      return makeListPeriod(this);
+    },
     fromNow: function() {
       return this.time.relative();
     },
@@ -46,13 +49,14 @@ if(Meteor.isClient) {
     },
     hammerGestures: {
       'pan .slider': function (e) {
-        if(this._id !== slidingId) {
+        var item = this;
+        if(item._id !== slidingId) {
           $('.slider').each(function() {
             $(this).css({transform: 'none'});
             $(this).closest('li').removeClass();
           });
 
-          slidingId = this._id;
+          slidingId = item._id;
         }
 
         var element = $(e.target);
@@ -62,8 +66,60 @@ if(Meteor.isClient) {
         }
 
         if(e.isFinal) {
-          element.css({transform: 'none'});
-          $(element).closest('li').removeClass();
+          if(e.deltaX > 100) {
+            element.animate({
+              'opacity': '800'
+            }, {
+              step: function (now) {
+                var amount = +now + e.deltaX;
+                $(this).css({
+                  transform: 'translate3d(' + amount + 'px, 0px, 0px)'
+                });
+              },
+              duration: 100,
+              easing: 'linear',
+              queue: false,
+              complete: function () {
+                $(this).closest('li').animate({
+                  'opacity': '0'
+                }, 100, function() {
+                  $(this).animate({height: 0}, 100, function() {
+                    $(this).remove();
+                    console.log('do db stuff [give it the new date]');
+                  });
+                });
+              }
+            }, 'linear');
+          }
+          else if(e.deltaX < -100) {
+            element.animate({
+              'opacity': '800'
+            }, {
+              step: function (now) {
+                var amount = e.deltaX - now; // changed
+                $(this).css({
+                  transform: 'translate3d(' + amount + 'px, 0px, 0px)'
+                });
+              },
+              duration: 100,
+              easing: 'linear',
+              queue: false,
+              complete: function () {
+                $(this).closest('li').animate({
+                  'opacity': '0'
+                }, 100, function() {
+                  $(this).animate({height: 0}, 100, function() {
+                    $(this).remove();
+                    console.log('do db stuff [delete it]'); // changed
+                  });
+                });
+              }
+            }, 'linear');
+          }
+          else {
+            element.css({transform: 'none'});
+            $(element).closest('li').removeClass();
+          }
         }
         else {
           element.css({transform: 'translate3d(' + e.deltaX + 'px, 0, 0)'});
@@ -120,6 +176,17 @@ if(Meteor.isClient) {
     }
 
     return 'red';
+  }
+
+  function makeListPeriod(obj) {
+    var number = obj.number;
+    var reocur = obj.recurring;
+
+    if(number > 1) {
+      return number + ' ' + reocur + 's';
+    }
+
+    return reocur;
   }
 
   function makePeriod() {
