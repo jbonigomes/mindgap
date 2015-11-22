@@ -21,6 +21,7 @@ http://nvie.com/posts/a-successful-git-branching-model/
 ### Todo
 
 - Fix bug, need to refresh the list when marking task as done
+- Refactor the gestures function
 - Publish (Android and iOS)
 - Remove autopublish
 - Tests
