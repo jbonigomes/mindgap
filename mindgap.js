@@ -48,6 +48,7 @@ if(Meteor.isClient) {
     },
     hammerGestures: {
       'pan .slider': function (e) {
+        var item = this;
         var element = $(e.target);
 
         if(!$(e.target).hasClass('slider')) {
@@ -74,7 +75,9 @@ if(Meteor.isClient) {
                 }, 100, function() {
                   $(this).animate({height: 0}, 100, function() {
                     $(this).remove();
-                    console.log('do db stuff [give it the new date]');
+                    items.update(item._id, {
+                      $set: {time: makeDueDate(item.number, item.recurring)}
+                    });
                   });
                 });
               }
@@ -99,7 +102,7 @@ if(Meteor.isClient) {
                 }, 100, function() {
                   $(this).animate({height: 0}, 100, function() {
                     $(this).remove();
-                    console.log('do db stuff [delete it]'); // changed
+                    items.remove(item._id);
                   });
                 });
               }

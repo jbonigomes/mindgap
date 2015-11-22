@@ -20,8 +20,7 @@ http://nvie.com/posts/a-successful-git-branching-model/
 
 ### Todo
 
-- fix legends (every hour, every 2 weeks, etc...)
-- conclude gesture actions
+- Fix bug, need to refresh the list when marking task as done
 - Publish (Android and iOS)
 - Remove autopublish
 - Tests
@@ -32,10 +31,9 @@ http://nvie.com/posts/a-successful-git-branching-model/
 - Push notifications
   - http://stackoverflow.com/questions/33557343/local-notifications-for-meteor-cordova
   - https://github.com/katzer/cordova-plugin-local-notifications
-- Pull to refresh or refresh the data every minute
+- Pull to refresh or refresh the data every minute, or both
   - https://atmospherejs.com/yangyi/iscrolljs-refresh
 - Animations, animations, animations
-- See what happens with the bug about reactivity, could save two lines of code :D
 - Templates and proper routing?
 - Do a login system and persist data on the web server?
 - More tests
