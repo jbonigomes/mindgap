@@ -36,8 +36,7 @@
     });
 
     this.When(/^I click "([^"]*)"$/, function (arg1) {
-      browser.waitForExist('.test');
-      browser.click('.test');
+      pending();
     });
 
     this.When(/^I set the slider to every "([^"]*)"$/, function (arg1) {
