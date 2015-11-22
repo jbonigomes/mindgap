@@ -1,5 +1,6 @@
 if(Meteor.isClient) {
 
+  var slidingId = 'Unknown';
   var items = new Ground.Collection(null);
 
   Template.body.rendered = function() {
@@ -43,27 +44,44 @@ if(Meteor.isClient) {
     status: function() {
       return makeStatus(this.time);
     },
-    // hammerConfig: function () {
-    //   return function (hammer, templateInstance) {
-    //     hammer.get('swipe').set({
-    //       velocity: 0.000000001
-    //     });
-    //     return hammer;
-    //   }
-    // },
-    hammerGests: {
-      'dragleft ul li': function (e, template) {
-        console.log('hi');
-        // var element = $(e.target);
+    hammerGestures: {
+      'pan .slider': function (e) {
+        if(this._id !== slidingId) {
+          $('.slider').each(function() {
+            $(this).css({transform: 'none'});
+            $(this).closest('li').removeClass();
+          });
 
-        // if($(e.target).context.nodeName !== 'LI') {
-        //   element = $(e.target).closest('li');
-        // }
+          slidingId = this._id;
+        }
 
-        // element.css({marginLeft: e.deltaX});
-      },
-      'dragright ul li': function (e, template) {
-        // todo
+        var element = $(e.target);
+
+        if(!$(e.target).hasClass('slider')) {
+          element = $(e.target).closest('.slider');
+        }
+
+        if(e.isFinal) {
+          element.css({transform: 'none'});
+          $(element).closest('li').removeClass();
+        }
+        else {
+          element.css({transform: 'translate3d(' + e.deltaX + 'px, 0, 0)'});
+
+          if(e.deltaX > 100) {
+            $(element).closest('li').addClass('green');
+          }
+          else {
+            $(element).closest('li').removeClass('green');
+          }
+
+          if(e.deltaX < -100) {
+            $(element).closest('li').addClass('red');
+          }
+          else {
+            $(element).closest('li').removeClass('red');
+          }
+        }
       }
     }
   });
@@ -84,10 +102,6 @@ if(Meteor.isClient) {
     'click .save-button': function(e) {
       e.preventDefault();
       saveForm();
-    },
-    'swipe ul li': function(e) {
-      e.preventDefault();
-      console.log('hi');
     }
   });
 

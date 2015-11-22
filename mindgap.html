@@ -15,17 +15,19 @@
 
     <section class="home">
       {{#if items.count}}
-        {{#HammerTouchArea gestureMap=hammerGests configureCallback=hammerConfig}}
+        {{#HammerTouchArea gestureMap=hammerGestures}}
           <ul>
             {{#each items}}
-              <li class="{{status}}">
-                <div class="time">
-                  <i class="fa fa-clock-o"></i>
-                  {{fromNow}}
-                </div>
-                <div class="title">{{title}}</div>
-                <div class="reocurrence">
-                  <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
+              <li>
+                <div class="slider {{status}}">
+                  <div class="time">
+                    <i class="fa fa-clock-o"></i>
+                    {{fromNow}}
+                  </div>
+                  <div class="title">{{title}}</div>
+                  <div class="reocurrence">
+                    <i class="fa fa-refresh"></i> every {{number}} {{recurring}}
+                  </div>
                 </div>
               </li>
             {{/each}}

@@ -17,18 +17,12 @@ $green:  #27AE60;
 $yellow: #F39C12;
 
 // Transparencies
-$shadow:      rgba(0, 0, 0, .5);
+$shadow:      rgba(0, 0, 0, .8);
 $transparent: rgba(236, 240, 241, .3);
 
 $fakeTransparent: #758695;
 
 // Mixins
-@mixin shadow($colour) {
-  -webkit-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
-     -moz-box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
-          box-shadow: inset 10px 0 0 0 $colour, 0 1px 0 0 $shadow;
-}
-
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
           border-radius: $radius;
@@ -47,6 +41,14 @@ $fakeTransparent: #758695;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+@mixin transition() {
+  -webkit-transition: background .3s ease-in-out;
+     -moz-transition: background .3s ease-in-out;
+      -ms-transition: background .3s ease-in-out;
+       -o-transition: background .3s ease-in-out;
+          transition: background .3s ease-in-out;
 }
 
 // Animations
@@ -147,26 +149,64 @@ ul {
   list-style-type: none;
 
   li {
-    padding: 10px 10px 20px 20px;
+    background: $grey;
+    @include transition();
+    border-bottom: 1px solid $shadow;
 
-    div {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    &.green {
+      background: $green;
+    }
+
+    &.red {
+      background: $red;
+    }
+
+    .slider {
+      background: $navy;
+      position: relative;
+      padding: 10px 10px 20px 10px;
+
+      div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &:after,
+      &:before {
+        top: 25px;
+        position: absolute;
+        text-rendering: auto;
+        display: inline-block;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font: normal normal normal 30px FontAwesome;
+      }
+
+      &:before {
+        left: -50px;
+        content: "\f00c";
+      }
+
+      &:after {
+        right: -40px;
+        content: "\f00d";
+      }
+
+      &.green {
+        border-left: 10px solid $green;
+      }
+
+      &.red {
+        border-left: 10px solid $red;
+      }
+
+      &.yellow {
+        border-left: 10px solid $yellow;
+      }
     }
   }
 
-  li.green {
-    @include shadow($green);
-  }
-
-  li.red {
-    @include shadow($red);
-  }
-
-  li.yellow {
-    @include shadow($yellow);
-  }
 }
 
 button {

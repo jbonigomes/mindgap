@@ -20,14 +20,11 @@ http://nvie.com/posts/a-successful-git-branching-model/
 
 ### Todo
 
-- Gestures for sliding list items to the left and right
-  - https://github.com/chriswessels/meteor-hammer/issues/23
-  - Sliding to the right should mark the item as done
-  - Sliding to the left should delete the item
+- fix legends (every hour, every 2 weeks, etc...)
+- conclude gesture actions
 - Publish (Android and iOS)
-- Remove autopublish and insecure packages
+- Remove autopublish
 - Tests
-- add legends to icons (day, hour, month and week)
 
 ### Version 2
 
@@ -40,6 +37,5 @@ http://nvie.com/posts/a-successful-git-branching-model/
 - Animations, animations, animations
 - See what happens with the bug about reactivity, could save two lines of code :D
 - Templates and proper routing?
-- Do a login system and persist data on the web?
+- Do a login system and persist data on the web server?
 - More tests
-
